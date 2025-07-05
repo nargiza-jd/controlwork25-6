@@ -3,6 +3,8 @@ package kg.attractor.java.controller;
 import com.sun.net.httpserver.HttpExchange;
 import freemarker.template.*;
 import kg.attractor.java.server.RouteHandler;
+import kg.attractor.java.utils.Storage;
+import kg.attractor.java.model.Patient;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -23,12 +25,15 @@ public class PatientsHandler implements RouteHandler {
 
         String rawDay = Optional.ofNullable(ex.getRequestURI().getQuery()).orElse("day=1");
         int day = Integer.parseInt(rawDay.split("=")[1]);
+
         YearMonth ym = YearMonth.now();
         LocalDate date = ym.atDay(day);
 
+        List<Patient> patients = Storage.getPatients(date);
+
         model.put("day", day);
         model.put("date", date.toString());
-        model.put("patients", List.of());
+        model.put("patients", patients);
 
         Template tpl = freemarker.getTemplate("patients.ftlh");
 

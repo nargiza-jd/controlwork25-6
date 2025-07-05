@@ -19,14 +19,19 @@
                     ${p.type}
                 </span>
                 ) - ${p.symptoms}
-            </li>
+                </li>
         </#list>
     </ul>
 <#else>
     <p>Пока никто не записан на эту дату.</p>
 </#if>
 
-<p><a href="/schedule">Вернуться к расписанию</a></p>
+<p>
+    <a href="/schedule">Вернуться к расписанию</a>
+</p>
+<p>
+    <a href="/patients/add?day=${day}">Добавить нового пациента на ${date}</a>
+</p>
 
 </body>
 </html>

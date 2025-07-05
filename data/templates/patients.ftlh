@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
-<div class="container"> <h1>Пациенты на дату ${date}</h1>
+<div class="container">
+    <h1>Пациенты на дату ${date}</h1>
 
     <#if patients?has_content>
         <ul>
@@ -19,7 +20,8 @@
                         ${p.type}
                     </span>
                     ) - ${p.symptoms}
-                    </li>
+                    <a href="/patients/delete?day=${day}&time=${p.time}&fullName=${p.fullName}" class="delete-button">Удалить</a>
+                </li>
             </#list>
         </ul>
     <#else>
@@ -27,8 +29,11 @@
     </#if>
 
     <p>
-        <a href="/schedule" class="button-link">Вернуться к расписанию</a> </p>
+        <a href="/schedule" class="button-link">Вернуться к расписанию</a>
+    </p>
     <p>
-        <a href="/patients/add?day=${day}" class="button-link">Добавить нового пациента на ${date}</a> </p>
-</div> </body>
+        <a href="/patients/add?day=${day}" class="button-link">Добавить нового пациента на ${date}</a>
+    </p>
+</div>
+</body>
 </html>

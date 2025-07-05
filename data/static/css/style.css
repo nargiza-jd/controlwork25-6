@@ -1,22 +1,21 @@
 html,
 body {
-    font-family: Arial, sans-serif; /* Выберите желаемый шрифт */
-    margin: 0; /* Убираем стандартные отступы */
-    padding: 0; /* Убираем стандартные отступы */
-    color: #333; /* Основной цвет текста */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
 }
 
 body {
-    background-color: #f4f4f4; /* Фоновый цвет, если нет картинки */
-    background: url("../bg/bg.png") 0 0 repeat; /* Фон с картинкой */
-    /* margin: 20px; - Убрано, так как контейнер будет отвечать за центрирование и отступы */
+    background-color: #f4f4f4;
+    background: url("../bg/bg.png") 0 0 repeat;
 }
 
 h1 {
     color: #0056b3;
-    text-align: center; /* Центрируем заголовок */
-    margin-top: 30px; /* Отступ сверху для заголовка */
-    margin-bottom: 20px; /* Отступ снизу для заголовка */
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 ul {
@@ -61,12 +60,11 @@ a:hover {
     color: #f0ad4e;
 }
 
-/* Стили для ссылок, чтобы они выглядели как кнопки */
 .button-link {
     display: inline-block;
     padding: 10px 20px;
     margin: 5px;
-    background-color: #4CAF50; /* Зеленый цвет, как у кнопки записи */
+    background-color: #4CAF50;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -79,10 +77,27 @@ a:hover {
     text-decoration: none;
 }
 
-/* Центрируем параграфы (для ссылок внизу) */
 p {
   text-align: center;
   padding-left: 0;
-  margin-top: 15px; /* Отступ сверху для параграфа с кнопками */
-  margin-bottom: 15px; /* Отступ снизу для параграфа с кнопками */
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.delete-button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-left: 15px;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    float: right;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+    text-decoration: none;
 }

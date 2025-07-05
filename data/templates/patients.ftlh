@@ -30,8 +30,8 @@
                 <td>${p.fullName}</td>
                 <td>${p.symptoms}</td>
                 <td>
-                  <a href="/patients/delete?day=${day?c}&time=${p.formattedTime?url('UTF-8')}&fullName=${p.fullName?url('UTF-8')}">
-                    Удалить
+                  <a href="/patients/delete?day=${day?c}&time=${p.formattedTime?url('UTF-8')}&fullName=${p.fullName?url('UTF-8')}" class="delete-link">
+                      Удалить
                   </a>
                 </td>
               </tr>

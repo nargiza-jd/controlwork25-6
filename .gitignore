@@ -3,3 +3,5 @@
 out/
 *.class
 *.log
+
+.DS_Store

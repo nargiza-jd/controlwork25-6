@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1 {
+    color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin-bottom: 8px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.today {
+    background-color: #e0ffe0;
+    font-weight: bold;
+    border: 1px solid #4CAF50;
+}
+
+.patient-type-первичный {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.patient-type-вторичный {
+    color: #5cb85c;
+    font-weight: bold;
+}
+
+.patient-type-консультация {
+    color: #f0ad4e;
+}

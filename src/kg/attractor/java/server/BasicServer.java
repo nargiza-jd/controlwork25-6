@@ -26,10 +26,10 @@ public abstract class BasicServer {
 
         server.createContext("/", this::dispatch);
 
-        registerFileHandler(".css",  ContentType.TEXT_CSS);
-        registerFileHandler(".html", ContentType.TEXT_HTML);
-        registerFileHandler(".jpg",  ContentType.IMAGE_JPEG);
-        registerFileHandler(".png",  ContentType.IMAGE_PNG);
+//        registerFileHandler(".css",  ContentType.TEXT_CSS);
+//        registerFileHandler(".html", ContentType.TEXT_HTML);
+//        registerFileHandler(".jpg",  ContentType.IMAGE_JPEG);
+//        registerFileHandler(".png",  ContentType.IMAGE_PNG);
 
         registerGet("",  ex -> redirect303(ex, "/schedule"));
         registerGet("/", ex -> redirect303(ex, "/schedule"));
@@ -40,16 +40,49 @@ public abstract class BasicServer {
     protected void registerGet (String route, RouteHandler h){ routes.put("GET "  + route, h); }
     protected void registerPost(String route, RouteHandler h){ routes.put("POST " + route, h); }
 
-    private void registerFileHandler(String ext, ContentType type){
-        registerGet(ext, ex -> sendFile(ex, makePath(ex), type));
-    }
+
 
     private void dispatch(HttpExchange ex) throws IOException {
         String path = ex.getRequestURI().getPath();
-        if (path.isBlank()) path = "/";
-        String key  = ex.getRequestMethod().toUpperCase() + " " + path;
+        String method = ex.getRequestMethod().toUpperCase();
+
+        if ("GET".equals(method)) {
+            String fileExtension = getFileExtension(path);
+            ContentType contentType = getContentType(fileExtension);
+
+            if (contentType != null) {
+
+                Path filePath = makePath(path.substring(1));
+                if (Files.exists(filePath)) {
+                    sendFile(ex, filePath, contentType);
+                    return;
+                }
+            }
+        }
+
+        String key  = method + " " + path;
         RouteHandler handler = routes.getOrDefault(key, this::respond404);
         handler.handle(ex);
+    }
+
+
+    private String getFileExtension(String fileName) {
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex == -1 || dotIndex == fileName.length() - 1) {
+            return null;
+        }
+        return fileName.substring(dotIndex);
+    }
+
+    private ContentType getContentType(String fileExtension) {
+        if (fileExtension == null) return null;
+        return switch (fileExtension.toLowerCase()) {
+            case ".css" -> ContentType.TEXT_CSS;
+            case ".html" -> ContentType.TEXT_HTML;
+            case ".jpg", ".jpeg" -> ContentType.IMAGE_JPEG;
+            case ".png" -> ContentType.IMAGE_PNG;
+            default -> null;
+        };
     }
 
     protected Path makePath(String... parts){ return Path.of(dataDir, parts); }

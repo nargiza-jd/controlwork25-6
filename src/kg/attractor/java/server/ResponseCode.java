@@ -10,10 +10,10 @@ public enum ResponseCode {
     private final int code;
 
     ResponseCode(int c) {
-        code = c;
+        this.code = c;
     }
 
-    public int get() {
+    public int getCode() {
         return code;
     }
 }

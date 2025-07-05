@@ -1,10 +1,10 @@
 package kg.attractor.java.server;
 
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapperBuilder;
-import freemarker.template.Version;
+import kg.attractor.java.controller.AddPatientHandler;
 import kg.attractor.java.controller.PatientsHandler;
 import kg.attractor.java.controller.ScheduleHandler;
+import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,15 +14,21 @@ public class PatientServer extends BasicServer {
     public PatientServer(String host, int port) throws IOException {
         super(host, port);
 
-        Configuration cfg = new Configuration(new Version("2.3.29"));
-        cfg.setDirectoryForTemplateLoading(new File("data/templates"));
-        cfg.setDefaultEncoding("UTF-8");
+        Configuration freemarker = configureFreemarker();
 
-        cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_29).build());
+        registerGet("/schedule", new ScheduleHandler(freemarker));
+        registerGet("/patients", new PatientsHandler(freemarker));
+        registerGet("/patients/add", new AddPatientHandler(freemarker));
+        registerPost("/patients/add", new AddPatientHandler(freemarker));
+    }
 
-        registerGet("/schedule", new ScheduleHandler(cfg));
-
-
-        registerGet("/patients", new PatientsHandler(cfg));
+    private Configuration configureFreemarker() throws IOException {
+        Configuration configuration = new Configuration(Configuration.VERSION_2_3_29);
+        configuration.setDirectoryForTemplateLoading(new File("data/templates"));
+        configuration.setDefaultEncoding("UTF-8");
+        configuration.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        configuration.setLogTemplateExceptions(false);
+        configuration.setWrapUncheckedExceptions(true);
+        return configuration;
     }
 }

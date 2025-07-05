@@ -38,14 +38,12 @@ public class AddPatientHandler implements RouteHandler {
         } else if ("POST".equals(ex.getRequestMethod())) {
             handlePost(ex);
         } else {
-
             ex.sendResponseHeaders(405, -1);
         }
     }
 
     private void handleGet(HttpExchange ex) throws IOException {
         Map<String, Object> model = new HashMap<>();
-
 
         String rawDay = Query.getParam(ex.getRequestURI().getQuery(), "day")
                 .orElseThrow(() -> new IllegalArgumentException("Day parameter is missing"));
@@ -60,7 +58,6 @@ public class AddPatientHandler implements RouteHandler {
     }
 
     private void handlePost(HttpExchange ex) throws IOException {
-
         String requestBody = new String(ex.getRequestBody().readAllBytes(), StandardCharsets.UTF_8);
         Map<String, String> params = parseRequestBody(requestBody);
 
@@ -72,16 +69,14 @@ public class AddPatientHandler implements RouteHandler {
             String type = params.get("type");
             String symptoms = params.get("symptoms");
 
-
             Patient newPatient = new Patient(time, fullName, type, symptoms);
             Storage.addPatient(date, newPatient);
 
-
             ex.getResponseHeaders().set("Location", "/patients?day=" + day);
-            ex.sendResponseHeaders(ResponseCode.SEE_OTHER.get(), -1);
+
+            ex.sendResponseHeaders(ResponseCode.SEE_OTHER.getCode(), -1);
         } catch (Exception e) {
             System.err.println("Error adding patient: " + e.getMessage());
-
             ex.sendResponseHeaders(500, -1);
         }
     }

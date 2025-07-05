@@ -64,7 +64,7 @@ public abstract class BasicServer {
     protected void sendBytes(HttpExchange ex, ResponseCode code,
                              ContentType ct, byte[] data) throws IOException {
         ex.getResponseHeaders().set("Content-Type", ct.toString());
-        ex.sendResponseHeaders(code.get(), data.length);
+        ex.sendResponseHeaders(code.getCode(), data.length);
         try (var out = ex.getResponseBody()){ out.write(data); }
     }
 
@@ -72,7 +72,7 @@ public abstract class BasicServer {
         Headers headers = ex.getResponseHeaders();
         headers.set("Location", path);
 
-        ex.sendResponseHeaders(ResponseCode.SEE_OTHER.get(), -1);
+        ex.sendResponseHeaders(ResponseCode.SEE_OTHER.getCode(), -1);
     }
 
     protected String body(HttpExchange ex){

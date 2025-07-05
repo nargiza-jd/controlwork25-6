@@ -1,7 +1,19 @@
 package kg.attractor.java.server;
+
 public enum ResponseCode {
-    OK(200), NOT_FOUND(404), REDIRECT_303(303);
+    OK(200),
+    SEE_OTHER(303),
+    NOT_FOUND(404),
+    METHOD_NOT_ALLOWED(405),
+    INTERNAL_SERVER_ERROR(500);
+
     private final int code;
-    ResponseCode(int c){ code = c; }
-    public int get() { return code; }
+
+    ResponseCode(int c) {
+        code = c;
+    }
+
+    public int get() {
+        return code;
+    }
 }

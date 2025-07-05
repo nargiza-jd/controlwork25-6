@@ -1,5 +1,6 @@
 package kg.attractor.java.server;
 
+import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import java.io.*;
@@ -18,6 +19,8 @@ public abstract class BasicServer {
     private final String dataDir = "data";
 
     protected BasicServer(String host, int port) throws IOException {
+
+
         server = HttpServer.create(new InetSocketAddress(host, port), 50);
         System.out.printf("Server started: http://%s:%d/%n", host, port);
 
@@ -38,7 +41,6 @@ public abstract class BasicServer {
     protected void registerPost(String route, RouteHandler h){ routes.put("POST " + route, h); }
 
     private void registerFileHandler(String ext, ContentType type){
-
         registerGet(ext, ex -> sendFile(ex, makePath(ex), type));
     }
 
@@ -46,7 +48,8 @@ public abstract class BasicServer {
         String path = ex.getRequestURI().getPath();
         if (path.isBlank()) path = "/";
         String key  = ex.getRequestMethod().toUpperCase() + " " + path;
-        routes.getOrDefault(key, this::respond404).handle(ex);
+        RouteHandler handler = routes.getOrDefault(key, this::respond404);
+        handler.handle(ex);
     }
 
     protected Path makePath(String... parts){ return Path.of(dataDir, parts); }
@@ -65,9 +68,11 @@ public abstract class BasicServer {
         try (var out = ex.getResponseBody()){ out.write(data); }
     }
 
-    protected void redirect303(HttpExchange ex, String to) throws IOException {
-        ex.getResponseHeaders().add("Location", to);
-        ex.sendResponseHeaders(ResponseCode.REDIRECT_303.get(), -1);
+    protected void redirect303(HttpExchange ex, String path) throws IOException {
+        Headers headers = ex.getResponseHeaders();
+        headers.set("Location", path);
+
+        ex.sendResponseHeaders(ResponseCode.SEE_OTHER.get(), -1);
     }
 
     protected String body(HttpExchange ex){

@@ -3,6 +3,7 @@ package kg.attractor.java.controller;
 import com.sun.net.httpserver.HttpExchange;
 import freemarker.template.*;
 import kg.attractor.java.server.*;
+import kg.attractor.java.utils.Storage;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -20,6 +21,7 @@ public class ScheduleHandler implements RouteHandler {
 
     @Override
     public void handle(HttpExchange ex) throws IOException {
+
         Map<String,Object> model = new HashMap<>();
         LocalDate today = LocalDate.now();
         YearMonth ym   = YearMonth.of(today.getYear(), today.getMonth());
@@ -33,6 +35,7 @@ public class ScheduleHandler implements RouteHandler {
             day.put("dow", date.getDayOfWeek()
                     .getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
             day.put("patients", Storage.count(date));
+
             days.add(day);
         }
         model.put("days", days);
@@ -40,7 +43,7 @@ public class ScheduleHandler implements RouteHandler {
                 .getDisplayName(TextStyle.FULL_STANDALONE, Locale.ENGLISH));
         model.put("year", today.getYear());
 
-        Template tpl = freemarker.getTemplate("schedule.ftl");
+        Template tpl = freemarker.getTemplate("schedule.ftlh");
 
         ex.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
         ex.sendResponseHeaders(200, 0);

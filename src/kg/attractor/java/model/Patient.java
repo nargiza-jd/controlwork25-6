@@ -1,6 +1,7 @@
 package kg.attractor.java.model;
 
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Patient {
     private LocalTime time;
@@ -17,6 +18,10 @@ public class Patient {
 
     public LocalTime getTime() {
         return time;
+    }
+
+    public String getFormattedTime() {
+        return time.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     public void setTime(LocalTime time) {

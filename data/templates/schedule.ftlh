@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Расписание</title>
-    <link rel="stylesheet" href="/style.css"> </head>
+    <link rel="stylesheet" href="/static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/freemarker.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
 <body>
 <h1>${month} ${year}</h1>
 <ul>

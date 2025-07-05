@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Пациенты – день ${day}</title>
-    <link rel="stylesheet" href="/style.css"> </head>
+    <link rel="stylesheet" href="/static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/freemarker.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
 <body>
 <h1>Пациенты на дату ${date}</h1>
 
@@ -11,7 +14,7 @@
     <ul>
         <#list patients as p>
             <li>
-                ${p.time?string["HH:mm"]} - ${p.fullName} (
+                ${p.formattedTime} - ${p.fullName} (
                 <span class="patient-type-${p.type?lower_case}">
                     ${p.type}
                 </span>

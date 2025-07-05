@@ -1,6 +1,7 @@
 package kg.attractor.java.server;
 
 import freemarker.template.Configuration;
+import freemarker.template.DefaultObjectWrapperBuilder;
 import freemarker.template.Version;
 import kg.attractor.java.controller.PatientsHandler;
 import kg.attractor.java.controller.ScheduleHandler;
@@ -16,6 +17,8 @@ public class PatientServer extends BasicServer {
         Configuration cfg = new Configuration(new Version("2.3.29"));
         cfg.setDirectoryForTemplateLoading(new File("data/templates"));
         cfg.setDefaultEncoding("UTF-8");
+
+        cfg.setObjectWrapper(new DefaultObjectWrapperBuilder(Configuration.VERSION_2_3_29).build());
 
         registerGet("/schedule", new ScheduleHandler(cfg));
 

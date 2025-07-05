@@ -1,8 +1,11 @@
 package kg.attractor.java.utils;
 
+import kg.attractor.java.model.Patient;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -74,5 +77,14 @@ public final class Generator {
         return removeExtra.matcher(makeGibberish(0,1))
                 .replaceAll("")
                 .replace(" ", "");
+    }
+
+    public static Patient generatePatient() {
+        return new Patient(
+                LocalTime.of(r.nextInt(9) + 9, r.nextInt(2) * 30),
+                makeName(),
+                r.nextBoolean() ? "первичный" : "повторный",
+                makeDescription()
+        );
     }
 }

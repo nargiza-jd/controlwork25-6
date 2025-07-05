@@ -24,17 +24,22 @@ public class Storage {
     }
 
     public static boolean deletePatient(int day, LocalTime time, String fullName) {
-        LocalDate date = LocalDate.of(LocalDate.now().getYear(),
-                LocalDate.now().getMonth(), day);
+        LocalDate date = LocalDate.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), day);
 
         List<Patient> list = appointments.get(date);
         if (list == null) return false;
 
-        return list.removeIf(p ->
+        boolean removed = list.removeIf(p ->
                 p.getTime().equals(time) &&
-                        p.getFullName().equalsIgnoreCase(fullName));
-    }
+                        p.getFullName().equalsIgnoreCase(fullName)
+        );
 
+        if (list.isEmpty()) {
+            appointments.remove(date);
+        }
+
+        return removed;
+    }
     static {
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plusDays(1);

@@ -37,7 +37,17 @@ public class Storage {
 
     static {
         LocalDate today = LocalDate.now();
-        addPatient(today, new Patient(LocalTime.of(10, 0), "Иванов Иван",   "первичный", "Боли в спине"));
-        addPatient(today, new Patient(LocalTime.of(11,30), "Петрова Анна",  "вторичный", "Контрольный осмотр"));
+        LocalDate tomorrow = today.plusDays(1);
+        LocalDate nextWeek = today.plusWeeks(1);
+
+        addPatient(today, new Patient(LocalTime.of(10, 0), "Иванов Иван", "первичный", "Боли в спине"));
+        addPatient(today, new Patient(LocalTime.of(11, 30), "Петрова Анна", "вторичный", "Контрольный осмотр"));
+        addPatient(today, new Patient(LocalTime.of(14, 0), "Сидоров Олег", "первичный", "Высокая температура"));
+
+        addPatient(tomorrow, new Patient(LocalTime.of(9, 0), "Кузнецова Мария", "первичный", "Головные боли"));
+        addPatient(tomorrow, new Patient(LocalTime.of(15, 0), "Михайлов Дмитрий", "вторичный", "Результаты анализов"));
+
+        addPatient(nextWeek, new Patient(LocalTime.of(10, 0), "Алексеева Елена", "первичный", "Профилактический осмотр"));
+        addPatient(nextWeek, new Patient(LocalTime.of(12, 0), "Николаев Сергей", "вторичный", "Реабилитация"));
     }
 }

@@ -32,12 +32,17 @@ public class ScheduleHandler implements RouteHandler {
         for (int d = 1; d <= ym.lengthOfMonth(); d++) {
             LocalDate date = ym.atDay(d);
 
+            if (date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+                continue;
+            }
+
             Map<String, Object> day = new HashMap<>();
-            day.put("number",       d);
-            day.put("isToday",      date.equals(today));
-            day.put("dayOfWeek",    date.getDayOfWeek()
+            day.put("number", d);
+            day.put("isToday", date.equals(today));
+            day.put("dayOfWeek", date.getDayOfWeek()
                     .getDisplayName(TextStyle.SHORT, Locale.ENGLISH));
             day.put("patientCount", Storage.count(date));
+
             days.add(day);
         }
 

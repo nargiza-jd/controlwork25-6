@@ -38,7 +38,7 @@ public abstract class BasicServer {
 
     public void start() {
         server.start();
-        logger.info("Server is running...");
+
     }
 
     protected void registerGet(String route, RouteHandler h) {

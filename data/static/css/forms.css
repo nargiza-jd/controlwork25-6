@@ -3,6 +3,10 @@ form {
     max-width: 500px;
     min-width: 200px;
     margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 fieldset {
@@ -23,10 +27,7 @@ fieldset {
 }
 
 .form-element {
-    margin-top: 20px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-top: 15px;
 }
 
 fieldset input,
@@ -35,14 +36,20 @@ fieldset textarea {
     display: block;
     box-sizing: border-box;
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 4px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 fieldset label {
-    display: none;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
 }
+
 
 .hr-line {
     border-bottom: 1px solid #ddd;
@@ -71,5 +78,10 @@ fieldset label {
     font-weight: bold;
     color: white;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #248a50;
 }

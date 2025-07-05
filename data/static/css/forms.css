@@ -1,14 +1,3 @@
-html,
-body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background: url("../bg/bg.png") 0 0 repeat;
-}
-
 form {
     width: 50%;
     max-width: 500px;
@@ -35,13 +24,20 @@ fieldset {
 
 .form-element {
     margin-top: 20px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-fieldset input {
+fieldset input,
+fieldset select,
+fieldset textarea {
     display: block;
     box-sizing: border-box;
     width: 100%;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 fieldset label {
@@ -75,4 +71,5 @@ fieldset label {
     font-weight: bold;
     color: white;
     cursor: pointer;
+    margin-top: 20px;
 }

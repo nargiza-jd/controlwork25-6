@@ -1,12 +1,20 @@
+html,
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
     color: #333;
+}
+
+body {
+    background-color: #f4f4f4;
+    background: url("../bg/bg.png") 0 0 repeat;
+    margin: 20px;
 }
 
 h1 {
     color: #0056b3;
+    text-align: center;
 }
 
 ul {
@@ -49,4 +57,27 @@ a:hover {
 
 .patient-type-консультация {
     color: #f0ad4e;
+}
+
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.button-link:hover {
+    background-color: #45a049;
+    text-decoration: none;
+}
+
+
+p {
+  text-align: center;
+  padding-left: 0;
 }

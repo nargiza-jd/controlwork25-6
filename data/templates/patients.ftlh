@@ -9,31 +9,41 @@
 </head>
 <body>
 <div class="container">
-    <h1>Пациенты на дату ${date}</h1>
+    <h1>Пациенты на ${date}</h1>
 
     <#if patients?has_content>
-        <ul>
+        <table>
+            <thead>
+              <tr>
+                <th>Время</th>
+                <th>Тип</th>
+                <th>ФИО</th>
+                <th>Симптомы</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
             <#list patients as p>
-                <li>
-                    ${p.formattedTime} - ${p.fullName} (
-                    <span class="patient-type-${p.type?lower_case}">
-                        ${p.type}
-                    </span>
-                    ) - ${p.symptoms}
-                    <a href="/patients/delete?day=${day}&time=${p.time}&fullName=${p.fullName}" class="delete-button">Удалить</a>
-                </li>
+              <tr>
+                <td>${p.formattedTime}</td>
+                <td>${p.type}</td>
+                <td>${p.fullName}</td>
+                <td>${p.symptoms}</td>
+                <td>
+                  <a href="/patients/delete?day=${day?c}&time=${p.formattedTime?url('UTF-8')}&fullName=${p.fullName?url('UTF-8')}">
+                    Удалить
+                  </a>
+                </td>
+              </tr>
             </#list>
-        </ul>
+            </tbody>
+        </table>
     <#else>
         <p>Пока никто не записан на эту дату.</p>
     </#if>
 
-    <p>
-        <a href="/schedule" class="button-link">Вернуться к расписанию</a>
-    </p>
-    <p>
-        <a href="/patients/add?day=${day}" class="button-link">Добавить нового пациента на ${date}</a>
-    </p>
+    <p><a href="/patients/add?day=${day?c}">Добавить пациента</a></p>
+    <p><a href="/schedule">Вернуться к расписанию</a></p>
 </div>
 </body>
 </html>

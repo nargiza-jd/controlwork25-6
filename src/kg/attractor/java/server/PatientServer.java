@@ -1,6 +1,7 @@
 package kg.attractor.java.server;
 
 import kg.attractor.java.controller.AddPatientHandler;
+import kg.attractor.java.controller.DeletePatientHandler;
 import kg.attractor.java.controller.PatientsHandler;
 import kg.attractor.java.controller.ScheduleHandler;
 import freemarker.template.Configuration;
@@ -20,6 +21,8 @@ public class PatientServer extends BasicServer {
         registerGet("/patients", new PatientsHandler(freemarker));
         registerGet("/patients/add", new AddPatientHandler(freemarker));
         registerPost("/patients/add", new AddPatientHandler(freemarker));
+
+        registerGet("/patients/delete", new DeletePatientHandler());
     }
 
     private Configuration configureFreemarker() throws IOException {
